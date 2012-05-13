@@ -70,7 +70,7 @@ class Machine {
         if (coinsInside < 1)
             throw notEnoughException;
         System.out.println("Returning " + coinsInside + " coins");
-
+        coinsInside = 0;
     }
 
     class CoffeeType {

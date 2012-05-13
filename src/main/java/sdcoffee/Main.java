@@ -10,49 +10,50 @@ public class Main {
     public static void main(String args[]) {
 
         Machine m = new VendingMachine();
-        
-        try {
-            connectCommandsToMachine(m);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        connectCommandsToMachine(m);
 
     }
 
-    private static void connectCommandsToMachine(Machine machine) throws IOException {
+    private static void connectCommandsToMachine(Machine machine) {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
 
-            String command = reader.readLine();
+            try {
 
-            if (command.equalsIgnoreCase("add sugar")) {
-                machine.addSugar();
-                continue;
+                String command = reader.readLine();
+
+                if (command.equalsIgnoreCase("add sugar")) {
+                    machine.addSugar();
+                    continue;
+                }
+
+                if (command.equalsIgnoreCase("cancel")) {
+                    machine.cancel();
+                    continue;
+                }
+
+                String commandTokens[] = command.split(" ");
+                if (commandTokens[0].equalsIgnoreCase("select")) {
+                    machine.select(commandTokens[1]);
+                    continue;
+                }
+
+                if (commandTokens[0].equalsIgnoreCase("insert")) {
+                    machine.insert(Integer.parseInt(commandTokens[1]));
+                    continue;
+                }
+
+                if (commandTokens[0].equalsIgnoreCase("exit")) {
+                    break;
+                }
+
+                System.out.println("Unknown command");
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-
-            if (command.equalsIgnoreCase("cancel")) {
-                machine.cancel();
-                continue;
-            }
-
-            String commandTokens[] = command.split(" ");
-            if (commandTokens[0].equalsIgnoreCase("select")) {
-                machine.select(commandTokens[1]);
-                continue;
-            }
-
-            if (commandTokens[0].equalsIgnoreCase("insert")) {
-                machine.insert(Integer.parseInt(commandTokens[1]));
-                continue;
-            }
-
-            if (commandTokens[0].equalsIgnoreCase("exit")) {
-                break;
-            }
-
-            throw new RuntimeException("Unknown command");
 
         }
 
