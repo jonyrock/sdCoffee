@@ -1,1 +1,6 @@
-This file was created by IntelliJ IDEA 11.0.2 for binding GitHub repository
+Coffee machine SD task
+
+learn more: /docs/
+
+build: mvn package
+run:   java -cp target/sdCoffee-1.1.jar sdcoffee.Main
