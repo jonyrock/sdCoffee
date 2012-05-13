@@ -19,7 +19,7 @@ public class Tests {
     public void testInsertBadCoinAndContinue() {
         machine = new Machine();
         machine.insert(1);
-        
+
         boolean wasException = false;
         try {
             // bad coin
@@ -46,11 +46,36 @@ public class Tests {
             wasException = true;
         }
         Assert.assertTrue(wasException);
-        
+
         // check that machine is ok
         machine.insert(3);
         machine.select("latte");
-        
+
     }
+
+    @Test
+    public void testCoffeeWithSugarInVendingMachine() {
+        machine = new VendingMachine();
+        machine.insert(10);
+        machine.addSugar();
+        machine.select("latte");
+        int itemCost = machine.coffeeMenu.get("latte").Cost;
+        Assert.assertTrue(10 - 1 - itemCost == machine.coinsInside);
+    }
+
+    @Test
+    public void testNoSugarForWater() {
+
+        machine = new VendingMachine();
+        machine.insert(10);
+        machine.insert(50);
+        machine.addSugar();
+        machine.addSugar();
+        machine.select("perrier");
+        int itemCost = machine.coffeeMenu.get("perrier").Cost;
+        Assert.assertTrue(10 + 50 - itemCost == machine.coinsInside);
+
+    }
+
 
 }

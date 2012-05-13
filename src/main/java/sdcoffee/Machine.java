@@ -53,17 +53,30 @@ class Machine {
         }
         System.out.println(res);
 
-        sugarIsAdded = false;
+        resetSugar();
 
     }
+
+    int sugarAddedTimes = 0;
 
     public void addSugar() {
         if (coinsInside < 1) {
             throw notEnoughException;
         }
         coinsInside--;
+        sugarAddedTimes++;
         sugarIsAdded = true;
 
+    }
+
+    void rollbackSugar() {
+        coinsInside += sugarAddedTimes;
+        resetSugar();
+    }
+
+    void resetSugar() {
+        sugarIsAdded = false;
+        sugarAddedTimes = 0;
     }
 
     public void cancel() {
@@ -71,6 +84,7 @@ class Machine {
             throw notEnoughException;
         System.out.println("Returning " + coinsInside + " coins");
         coinsInside = 0;
+        resetSugar();
     }
 
     class CoffeeType {
