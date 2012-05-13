@@ -1,3 +1,5 @@
+package sdcoffee;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,6 +46,10 @@ public class Main {
             if (commandTokens[0].equalsIgnoreCase("insert")) {
                 machine.insert(Integer.parseInt(commandTokens[1]));
                 continue;
+            }
+
+            if (commandTokens[0].equalsIgnoreCase("exit")) {
+                break;
             }
 
             throw new RuntimeException("Unknown command");

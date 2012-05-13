@@ -1,3 +1,5 @@
+package sdcoffee;
+
 public class VendingMachine extends Machine{
     
     public VendingMachine(){
